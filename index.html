@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026年个税年度汇算计算器 - 预览版</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:#F5F7FA;color:#1f2937;line-height:1.6}
+.container{max-width:800px;margin:0 auto;padding:20px}
+.card{background:#fff;border-radius:8px;padding:24px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.1)}
+h1{font-size:28px;font-weight:700;text-align:center;margin-bottom:8px}
+.subtitle{text-align:center;color:#6b7280;margin-bottom:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 24px;border-radius:6px;font-size:16px;font-weight:500;cursor:pointer;border:none;transition:.15s}
+.btn-primary{background:#1D4ED8;color:#fff}
+.btn-primary:hover{background:#1e40af}
+.btn-outline{background:transparent;border:1px solid #d1d5db;color:#374151}
+.btn-outline:hover{background:#f3f4f6}
+.btn-block{width:100%}
+.input-group{margin-bottom:16px}
+label{display:block;font-size:14px;font-weight:500;color:#374151;margin-bottom:6px}
+input[type="number"]{width:100%;padding:10px 12px;border:1px solid #e5e7eb;border-radius:6px;font-size:14px;background:#f9fafb}
+input[type="number"]:focus{outline:none;border-color:#1D4ED8;box-shadow:0 0 0 3px rgba(29,78,216,.1)}
+input:disabled{background:#e5e7eb;cursor:not-allowed}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.section-title{font-size:18px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid #f3f4f6}
+.result-box{background:#1D4ED8;color:#fff;padding:24px;border-radius:8px 8px 0 0;text-align:center}
+.result-box.green{background:#059669}
+.result-amount{font-size:36px;font-weight:700;margin:8px 0}
+.result-label{font-size:14px;opacity:.9}
+.result-detail{padding:16px;background:#fff;border-radius:0 0 8px 8px}
+.row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f3f4f6;font-size:14px}
+.row:last-child{border-bottom:none}
+.row .muted{color:#6b7280}
+.row .val{font-weight:500}
+.tip{background:#fef3c7;border:1px solid #fde68a;color:#92400e;padding:12px;border-radius:6px;font-size:13px;margin-top:16px}
+.nav{display:flex;gap:12px;justify-content:center;margin-bottom:24px;flex-wrap:wrap}
+.nav a{color:#4b5563;text-decoration:none;font-size:14px;padding:6px 12px;border-radius:4px}
+.nav a:hover{color:#1D4ED8;background:#eff6ff}
+.nav a.active{color:#1D4ED8;font-weight:600;background:#dbeafe}
+.page{display:none}
+.page.active{display:block}
+.hero{text-align:center;padding:40px 0}
+.hero h1{font-size:32px;margin-bottom:12px}
+.hero p{color:#6b7280;font-size:16px;max-width:500px;margin:0 auto 24px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:32px}
+.feature{background:#fff;padding:20px;border-radius:8px;text-align:center}
+.feature-icon{width:48px;height:48px;background:#eff6ff;color:#1D4ED8;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px}
+.feature h3{font-size:16px;margin-bottom:8px}
+.feature p{color:#6b7280;font-size:13px}
+.disclaimer{background:#f3f4f6;padding:16px;border-radius:6px;margin-top:24px;font-size:13px;color:#4b5563}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="nav">
+    <a href="#" onclick="show('home')" id="nav-home">首页</a>
+    <a href="#" onclick="show('calc')" id="nav-calc">计算器</a>
+    <a href="#" onclick="show('guide')" id="nav-guide">使用说明</a>
+    <a href="#" onclick="show('about')" id="nav-about">关于我们</a>
+  </div>
+
+  <div id="page-home" class="page active">
+    <div class="hero">
+      <h1>2026 年个税 <span style="color:#1D4ED8">年度汇算计算器</span></h1>
+      <p>快速计算 2026 年度个人所得税综合所得汇算清缴，支持工资薪金、劳务报酬、稿酬及特许权使用费合并计算。</p>
+      <div>
+        <button class="btn btn-primary" onclick="show('calc')">开始计算 →</button>
+        <button class="btn btn-outline" onclick="show('guide')" style="margin-left:12px">查看说明</button>
+      </div>
+      <div class="features">
+        <div class="feature"><div class="feature-icon">⚡</div><h3>快速高效</h3><p>简单几步，即刻获取退补税结果</p></div>
+        <div class="feature"><div class="feature-icon">🛡</div><h3>精准权威</h3><p>严格遵循 2026 年最新个税政策</p></div>
+        <div class="feature"><div class="feature-icon">📱</div><h3>全端适配</h3><p>完美适配手机、平板及电脑</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="page-calc" class="page">
+    <h1>税额计算器</h1>
+    <p class="subtitle">输入您的年度收入和扣除项，自动计算应退/应补税额</p>
+
+    <div class="card">
+      <div class="section-title">1. 年度收入信息（税前）</div>
+      <div class="grid-2">
+        <div class="input-group"><label>工资薪金收入（元）</label><input type="number" id="salary" placeholder="0.00"></div>
+        <div class="input-group"><label>劳务报酬收入（元）</label><input type="number" id="labor" placeholder="0.00"></div>
+        <div class="input-group"><label>稿酬收入（元）</label><input type="number" id="author" placeholder="0.00"></div>
+        <div class="input-group"><label>特许权使用费（元）</label><input type="number" id="royalty" placeholder="0.00"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">2. 年度扣除项</div>
+      <div class="grid-2">
+        <div class="input-group"><label>基本减除费用（固定）</label><input type="number" value="60000" disabled></div>
+        <div class="input-group"><label>专项扣除 - 三险一金（元）</label><input type="number" id="socialSecurity" placeholder="0.00"></div>
+      </div>
+      <div style="margin-top:16px;font-size:14px;color:#6b7280;margin-bottom:12px">专项附加扣除：</div>
+      <div class="grid-2">
+        <div class="input-group"><label>子女教育（元）</label><input type="number" id="childrenEdu" placeholder="0.00"></div>
+        <div class="input-group"><label>继续教育（元）</label><input type="number" id="contEdu" placeholder="0.00"></div>
+        <div class="input-group"><label>大病医疗（元）</label><input type="number" id="medical" placeholder="0.00"></div>
+        <div class="input-group"><label>住房贷款利息（元）</label><input type="number" id="housingLoan" placeholder="0.00"></div>
+        <div class="input-group"><label>住房租金（元）</label><input type="number" id="housingRent" placeholder="0.00"></div>
+        <div class="input-group"><label>赡养老人（元）</label><input type="number" id="elderlySupport" placeholder="0.00"></div>
+        <div class="input-group"><label>3岁以下婴幼儿照护（元）</label><input type="number" id="infantCare" placeholder="0.00"></div>
+        <div class="input-group"><label>其他扣除（元）</label><input type="number" id="otherDeduction" placeholder="0.00"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">3. 已预缴税额</div>
+      <div class="input-group"><label>年度已预缴税额合计（元）</label><input type="number" id="prepaidTax" placeholder="0.00"></div>
+    </div>
+
+    <div style="display:flex;gap:12px;margin-bottom:24px">
+      <button class="btn btn-primary btn-block" onclick="calculate()">立即计算</button>
+      <button class="btn btn-outline" style="width:auto;min-width:80px" onclick="resetForm()">重置</button>
+    </div>
+
+    <div id="result" style="display:none;margin-bottom:24px">
+      <div id="result-header" class="result-box">
+        <div class="result-label">预计汇算结果</div>
+        <div class="result-amount" id="result-amount">¥ 0</div>
+        <div class="result-label" id="result-type">应退税额</div>
+      </div>
+      <div class="result-detail">
+        <div class="row"><span class="muted">综合所得收入额</span><span class="val" id="r-income">¥ 0</span></div>
+        <div class="row"><span class="muted">应纳税所得额</span><span class="val" id="r-taxable">¥ 0</span></div>
+        <div class="row"><span class="muted">年度应纳税额</span><span class="val" id="r-tax">¥ 0</span></div>
+        <div class="row"><span class="muted">年度已预缴税额</span><span class="val" id="r-prepaid">¥ 0</span></div>
+      </div>
+    </div>
+
+    <div class="tip">提示：本计算结果基于您填写的各项金额得出，仅供参考。实际结果请以"个人所得税"App 官方核算为准。</div>
+  </div>
+
+  <div id="page-guide" class="page">
+    <h1>使用说明</h1>
+    <div class="card">
+      <div class="section-title">汇算范围</div>
+      <p>2026 年度终了后，纳税人需要汇总 2026 年 1 月 1 日至 12 月 31 日取得的工资薪金、劳务报酬、稿酬、特许权使用费等四项所得（以下称综合所得）的收入额，减除费用 6 万元以及专项扣除、专项附加扣除、依法确定的其他扣除后，适用综合所得个税税率表，计算本年度最终应纳税额，再减去年度内已预缴税额，得出应退或应补税额。</p>
+    </div>
+    <div class="card">
+      <div class="section-title">计算公式</div>
+      <div style="background:#f3f4f6;padding:16px;border-radius:6px;font-family:monospace;font-size:13px;line-height:2">
+综合所得收入额 = 工资薪金 + 劳务报酬×80% + 稿酬×80%×70% + 特许权使用费×80%
+应纳税所得额 = 综合所得收入额 - 60000 - 专项扣除 - 专项附加扣除 - 其他扣除
+应纳税额 = 应纳税所得额 × 适用税率 - 速算扣除数
+应退或应补税额 = 应纳税额 - 已预缴税额
+      </div>
+    </div>
+    <div class="card">
+      <div class="section-title">填写建议</div>
+      <ul style="padding-left:20px;line-height:2">
+        <li><strong>工资薪金：</strong>指全年所有扣除前的毛工资（含奖金、津贴等）。</li>
+        <li><strong>专项扣除：</strong>主要指全年实际缴纳的"三险一金"个人部分。</li>
+        <li><strong>专项附加扣除：</strong>包括子女教育、继续教育、大病医疗、住房贷款利息、住房租金、赡养老人、3岁以下婴幼儿照护等。</li>
+        <li><strong>已预缴税额：</strong>请参考"个人所得税"App 中查询到的 2026 年度已预扣预缴税额。</li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="page-about" class="page">
+    <h1>关于我们</h1>
+    <div class="card">
+      <div class="section-title">项目初衷</div>
+      <p>2026 年个税年度汇算计算器致力于为广大纳税人提供一个简单、快捷、精准的个税测算工具。我们通过纯前端技术实现，不上传、不存储您的任何个人收入数据，保障您的隐私安全。</p>
+    </div>
+    <div class="card">
+      <div class="section-title">免责声明</div>
+      <p class="disclaimer">本计算器提供的计算结果仅供参考，不作为法律依据或申报凭证。具体的退补税金额请以国家税务总局官方"个人所得税"App 最终核算结果为准。我们在开发过程中力求数据的准确性，但不对因政策调整、用户输入错误或计算误差导致的任何后果承担责任。</p>
+    </div>
+  </div>
+</div>
+
+<script>
+function show(page){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav a').forEach(el=>el.classList.remove('active'));
+  document.getElementById('nav-'+page).classList.add('active');
+  window.scrollTo(0,0);
+}
+function getVal(id){return parseFloat(document.getElementById(id).value)||0}
+function fmt(n){return '¥ '+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+function calculate(){
+  var salary=getVal('salary'), labor=getVal('labor'), author=getVal('author'), royalty=getVal('royalty');
+  if(salary===0&&labor===0&&author===0&&royalty===0){alert('请至少输入一项收入信息');return;}
+  var income = salary + labor*0.8 + author*0.8*0.7 + royalty*0.8;
+  var special = getVal('childrenEdu')+getVal('contEdu')+getVal('medical')+getVal('housingLoan')+getVal('housingRent')+getVal('elderlySupport')+getVal('infantCare');
+  var taxable = income - 60000 - getVal('socialSecurity') - special - getVal('otherDeduction');
+  if(taxable<0) taxable=0;
+  var brackets=[{l:36000,r:.03,d:0},{l:144000,r:.1,d:2520},{l:300000,r:.2,d:16920},{l:420000,r:.25,d:31920},{l:660000,r:.3,d:52920},{l:960000,r:.35,d:85920},{l:Infinity,r:.45,d:181920}];
+  var tax=0;
+  for(var i=0;i<brackets.length;i++){if(taxable<=brackets[i].l){tax=taxable*brackets[i].r-brackets[i].d;break;}}
+  var prepaid=getVal('prepaidTax');
+  var diff=tax-prepaid;
+  var isRefund=diff<0;
+  var absDiff=Math.abs(diff);
+  document.getElementById('result').style.display='block';
+  document.getElementById('result-amount').textContent=fmt(absDiff);
+  document.getElementById('result-type').textContent=isRefund?'应退税额':(absDiff===0?'无需补退税':'应补税额');
+  document.getElementById('result-header').className='result-box'+(isRefund?' green':'');
+  document.getElementById('r-income').textContent=fmt(income);
+  document.getElementById('r-taxable').textContent=fmt(taxable);
+  document.getElementById('r-tax').textContent=fmt(tax);
+  document.getElementById('r-prepaid').textContent=fmt(prepaid);
+  setTimeout(function(){document.getElementById('result').scrollIntoView({behavior:'smooth'});},100);
+}
+function resetForm(){
+  ['salary','labor','author','royalty','socialSecurity','childrenEdu','contEdu','medical','housingLoan','housingRent','elderlySupport','infantCare','otherDeduction','prepaidTax'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('result').style.display='none';
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
