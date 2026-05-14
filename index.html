@@ -53,23 +53,16 @@ input:disabled{background:#e5e7eb;cursor:not-allowed}
 .disclaimer{background:#f3f4f6;padding:16px;border-radius:6px;margin-top:24px;font-size:13px;color:#4b5563}
 .privacy-link{text-align:center;margin-top:30px;font-size:13px;color:#6b7280}
 .privacy-link a{color:#1D4ED8;text-decoration:none}
-.ad-container{text-align:center;margin:10px 0;min-height:50px}
+/* 修复广告位空白问题 */
+.ad-container {
+  text-align: center;
+  margin: 10px auto;
+  max-width: 100%;
+  min-height: 0; /* 取消固定高度，避免空白占位 */
+}
 </style>
 </head>
 <body>
-
-<!-- 👇 顶部广告（手机收益最高） -->
-<div class="ad-container">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-6883887889648508"
-     data-ad-slot="1111111111"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-</div>
 
 <div class="container">
   <div class="nav">
@@ -213,12 +206,12 @@ input:disabled{background:#e5e7eb;cursor:not-allowed}
   </div>
 </div>
 
-<!-- 👇 底部广告（高曝光） -->
+<!-- 底部广告（无占位空白，仅在有广告时加载） -->
 <div class="ad-container">
 <ins class="adsbygoogle"
      style="display:block"
      data-ad-client="ca-pub-6883887889648508"
-     data-ad-slot="2222222222"
+     data-ad-slot="4567890123"
      data-ad-format="auto"
      data-full-width-responsive="true"></ins>
 <script>
