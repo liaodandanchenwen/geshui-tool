@@ -49,6 +49,8 @@ input:disabled{background:#e5e7eb;cursor:not-allowed}
 .feature h3{font-size:16px;margin-bottom:8px}
 .feature p{color:#6b7280;font-size:13px}
 .disclaimer{background:#f3f4f6;padding:16px;border-radius:6px;margin-top:24px;font-size:13px;color:#4b5563}
+.privacy-link{text-align:center;margin-top:30px;font-size:13px;color:#6b7280}
+.privacy-link a{color:#1D4ED8;text-decoration:none}
 </style>
 </head>
 <body>
@@ -58,6 +60,7 @@ input:disabled{background:#e5e7eb;cursor:not-allowed}
     <a href="#" onclick="show('calc')" id="nav-calc">计算器</a>
     <a href="#" onclick="show('guide')" id="nav-guide">使用说明</a>
     <a href="#" onclick="show('about')" id="nav-about">关于我们</a>
+    <a href="#" onclick="show('privacy')" id="nav-privacy">隐私政策</a>
   </div>
 
   <div id="page-home" class="page active">
@@ -171,6 +174,25 @@ input:disabled{background:#e5e7eb;cursor:not-allowed}
     <div class="card">
       <div class="section-title">免责声明</div>
       <p class="disclaimer">本计算器提供的计算结果仅供参考，不作为法律依据或申报凭证。具体的退补税金额请以国家税务总局官方"个人所得税"App 最终核算结果为准。我们在开发过程中力求数据的准确性，但不对因政策调整、用户输入错误或计算误差导致的任何后果承担责任。</p>
+    </div>
+  </div>
+
+  <!-- 👇 这里是我帮你加的隐私政策页面 -->
+  <div id="page-privacy" class="page">
+    <h1>隐私政策</h1>
+    <div class="card">
+      <p>更新日期：2026年1月1日</p><br>
+      <p>suangongju.cn（以下简称“本站”）尊重并保护所有用户的个人隐私。</p><br>
+      <h3>1. 信息收集</h3>
+      <p>本站仅自动收集以下非个人识别信息：IP 地址、浏览器类型、访问时间、浏览页面。</p><br>
+      <h3>2. Cookie 使用</h3>
+      <p>本站使用 Cookie 改善用户体验。后续若接入广告服务，将遵守相关平台隐私规则。</p><br>
+      <h3>3. 第三方广告</h3>
+      <p>本站可能使用 Google AdSense 等广告服务。用户可通过 Google 广告设置关闭个性化广告。</p><br>
+      <h3>4. 数据安全</h3>
+      <p>本站采取合理安全措施保护用户数据，不向第三方出售、交易用户信息。</p><br>
+      <h3>5. 联系方式</h3>
+      <p>邮箱：contact@suangongju.cn</p>
     </div>
   </div>
 </div>
