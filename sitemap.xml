@@ -4,13 +4,22 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+<!-- 包含主站 suangongju.cn 和二级域名 genshin.suangongju.cn 的站点地图 -->
 
-
+<!-- 主站首页 -->
 <url>
-  <loc>https://www.suangongju.cn/</loc>
+  <loc>https://suangongju.cn/</loc>
   <lastmod>2026-05-14T08:33:50+00:00</lastmod>
+  <changefreq>weekly</changefreq>  <!-- 内容更新频率：每周 -->
+  <priority>1.0</priority>        <!-- 优先级：最高（主站首页） -->
 </url>
 
+<!-- 二级域名 genshin.suangongju.cn 首页 -->
+<url>
+  <loc>https://genshin.suangongju.cn/</loc>
+  <lastmod>2026-05-15T00:00:00+00:00</lastmod>  <!-- 按实际更新时间改，当前填今日即可 -->
+  <changefreq>weekly</changefreq>                <!-- 内容更新频率：每周 -->
+  <priority>0.8</priority>                      <!-- 优先级：次高（二级域名） -->
+</url>
 
 </urlset>
